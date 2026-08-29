@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const MapComponent = () => {
-    const [coordinates, setCoordinates] = useState({
+    const [, setCoordinates] = useState({
         lat: null,
         lng: null,
         acc: null,
@@ -9,6 +9,14 @@ const MapComponent = () => {
         speed: null,
         head: null,
     });
+    // const [coordinates, setCoordinates] = useState({
+    //     lat: null,
+    //     lng: null,
+    //     acc: null,
+    //     alt: null,
+    //     speed: null,
+    //     head: null,
+    // });
 
     const mapRef = useRef(null);
 
