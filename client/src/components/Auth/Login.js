@@ -1,47 +1,50 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { supabase } from "../../services/supabaseClient";
 import "./login.css";
 
+// Rebuilt on Supabase Auth. There's no separate "admin login" anymore —
+// admin status is just a flag on your profile (set by an existing admin
+// in the Supabase dashboard), so the same form works for everyone; admin
+// pages/buttons show up automatically based on that flag once logged in.
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const [isAdminLogin, setIsAdminLogin] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async (event) => {
         event.preventDefault();
         setMessage("");
-        
-        try {
-            const endpoint = isAdminLogin ? "adminLogin" : "login";
-            const response = await axios.post(
-                `http://localhost:5000/${endpoint}`,
-                { email, password },
-                { withCredentials: true }
-            );
-            
-            if (response.status === 200) {
-                setMessage("Login successful! 🎉");
-                navigate("/");
-            }
-        } catch (error) {
-            setMessage(error.response?.data?.error || "Something went wrong.");
+        setLoading(true);
+
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+        setLoading(false);
+        if (error) {
+            setMessage(error.message);
+            return;
         }
+
+        setMessage("Login successful! 🎉");
+        navigate("/");
     };
 
-    const toggleAdminLogin = (e) => {
-        e.preventDefault();
-        setIsAdminLogin(!isAdminLogin);
+    const handleGoogleLogin = async () => {
         setMessage("");
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: { redirectTo: window.location.origin }
+        });
+        if (error) setMessage(error.message);
     };
 
     return (
         <div className="login-wrapper">
             <div className="login-container">
                 <form className="login-form" onSubmit={handleLogin}>
-                    <h2>{isAdminLogin ? "Admin Login" : "User Login"}</h2>
+                    <h2>Login</h2>
                     <div className="input-login-group">
                         <input
                             name="authUserEmail"
@@ -63,106 +66,28 @@ const Login = () => {
                         />
                     </div>
                     {message && <p className="login-message">{message}</p>}
-                    <button type="submit" name="authLoginSubmit" className="login-btn">
-                        {isAdminLogin ? "Login as Admin" : "Login as User"}
+                    <button type="submit" name="authLoginSubmit" className="login-btn" disabled={loading}>
+                        {loading ? "Logging in..." : "Login"}
                     </button>
-                    {!isAdminLogin && (
-                        <button 
-                            type="button" 
-                            name="authSignupBtn" 
-                            className="signUp-btn" 
-                            onClick={() => navigate("/signup")}
-                        >
-                            Signup
-                        </button>
-                    )}
+                    <button
+                        type="button"
+                        className="signUp-btn"
+                        onClick={handleGoogleLogin}
+                    >
+                        Continue with Google
+                    </button>
+                    <button
+                        type="button"
+                        name="authSignupBtn"
+                        className="signUp-btn"
+                        onClick={() => navigate("/signup")}
+                    >
+                        Signup
+                    </button>
                 </form>
-                <div className="admin-login-heading">
-                    <Link to="#" onClick={toggleAdminLogin}>
-                        {isAdminLogin ? "Login as User" : "Login as Admin"}
-                    </Link>
-                </div>
             </div>
         </div>
     );
 };
 
 export default Login;
-
-// import React, { useState } from "react";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
-// import "./login.css";
-
-
-// const Login = () => {
-//     const [email, setEmail] = useState("");
-//     const [password, setPassword] = useState("");
-//     const [message, setMessage] = useState("");
-//     const navigate = useNavigate();
-
-//     const handleLogin = async (event) => {
-//         event.preventDefault();
-//         setMessage("");
-
-//         try {
-//             const response = await axios.post(
-//                 "http://localhost:5000/login",
-//                 { email, password },
-//                 { withCredentials: true }
-//             );
-//             if (response.status === 200) {
-//                 setMessage("Login successful! 🎉");
-//                 navigate("/"); // ✅ Redirect after login
-//             }
-//         } catch (error) {
-//             setMessage(error.response?.data?.error || "Something went wrong.");
-//         }
-//     };
-
-//     return (
-//         <div className="login-wrapper">
-
-
-//             <div className="login-container">
-//                 <form className="login-form" onSubmit={handleLogin}>
-//                     <h2>Login</h2>
-//                     <div className="input-login-group" >
-//                         <input
-//                             name="authUserEmail"
-//                             type="email"
-//                             placeholder="Email"
-//                             value={email}
-//                             onChange={(e) => setEmail(e.target.value)}
-//                             required
-//                         />
-//                     </div>
-//                     <div className="input-login-group" >
-//                         <input
-//                             name="authUserPassword"
-//                             type="password"
-//                             placeholder="Password"
-//                             value={password}
-//                             onChange={(e) => setPassword(e.target.value)}
-//                             required
-//                         />
-//                     </div>
-//                     {message && <p className="login-message">{message}</p>}
-//                     <button type="submit" name="authLoginSubmit" className="login-btn">Login</button>
-//                     <button type="button" name="authSignupBtn" className="signUp-btn" onClick={() => navigate("/signup")}>
-//                         Signup
-//                     </button>
-//                 </form>
-//                 <div className="admin-login-heading">
-                   
-//                     <Link to="/adminLogin">Login As Admin</Link>
-                    
-//                     </div>
-//             </div>
-//         </div>
-
-//     );
-// };
-
-// export default Login;

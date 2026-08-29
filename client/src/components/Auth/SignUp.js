@@ -1,32 +1,47 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../../services/supabaseClient";
 import "./login.css";
 
+// Rebuilt on Supabase Auth. Passing user_name in options.data makes it
+// available to the handle_new_user() Postgres trigger (see db/schema.sql),
+// which creates the profile row and seeds the 12 default itinerary
+// activities automatically — no separate "create table for this user"
+// step needed anymore.
 const Signup = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSignup = async (event) => {
         event.preventDefault();
         setMessage("");
+        setLoading(true);
 
-        try {
-            const response = await axios.post(
-                "http://localhost:5000/signup",
-                { user_name: name, email: email, user_password: password }, // ✅ Matches backend
-                { withCredentials: true } // ✅ Ensures cookies are sent
-            );
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: { data: { user_name: name } }
+        });
 
-            if (response.status === 201) {
-                setMessage("Signup successful! 🎉");
-                navigate("/login"); // ✅ Redirects after signup
-            }
-        } catch (error) {
-            setMessage(error.response?.data?.error || "Something went wrong.");
+        setLoading(false);
+
+        if (error) {
+            setMessage(error.message);
+            return;
+        }
+
+        if (data.session) {
+            // Email confirmation is off in your Supabase project settings —
+            // the user is logged in immediately.
+            setMessage("Signup successful! 🎉");
+            navigate("/");
+        } else {
+            // Email confirmation is on — they need to click the link first.
+            setMessage("Signup successful! Check your email to confirm your account, then log in.");
         }
     };
 
@@ -42,14 +57,15 @@ const Signup = () => {
                         <input type="email" name="authSignupEmail" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
                     <div className="input-login-group">
-                        <input type="password" name="authSignupPassword" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        <input type="password" name="authSignupPassword" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
                     </div>
                     {message && <p className="message">{message}</p>}
-                    <button type="submit" name="authSignupSubmit" className="login-btn">Signup</button>
+                    <button type="submit" name="authSignupSubmit" className="login-btn" disabled={loading}>
+                        {loading ? "Signing up..." : "Signup"}
+                    </button>
                 </form>
             </div>
         </div>
-
     );
 };
 
