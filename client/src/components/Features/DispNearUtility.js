@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
+import { useEffect, useRef, useState } from "react";
+// import Navbar from '../Navbar/Navbar';
+// import Footer from '../Footer/Footer';
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
@@ -12,7 +12,7 @@ const MapComponent = () => {
   const mapRef = useRef(null);
   const routeRef = useRef(null);
   const userLocation = useRef(null);
-  const [places, setPlaces] = useState([]);
+  // const [places, setPlaces] = useState([]);
 
   useEffect(() => {
     const map = L.map(mapRef.current).setView([20.7141, 70.9876], 13);

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Admin_activities.css';
 import { Link } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
+// import Navbar from '../Navbar/Navbar';
 
 function App() {
     return (
