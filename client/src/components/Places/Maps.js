@@ -79,12 +79,12 @@ const MapComponent = () => {
         }}
       ></div>
       <p>
-        {/* Latitude: {coordinates.lat}, 
-        Longitude: {coordinates.lng},  */}
-        {/* Accuracy: {coordinates.acc}, 
+        Latitude: {coordinates.lat}, 
+        Longitude: {coordinates.lng}, 
+        Accuracy: {coordinates.acc}, 
         Altitude: {coordinates.alt}, 
         Speed: {coordinates.speed}, 
-        Heading: {coordinates.head} */}
+        Heading: {coordinates.head}
       </p>
     </div>
   );

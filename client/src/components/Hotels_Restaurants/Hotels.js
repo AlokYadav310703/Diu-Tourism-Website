@@ -8,8 +8,8 @@ import "./Hotels.css";
 const Hotels = () => {
   const { isAdmin } = useAuth();
   const [hotelsData, setHotelsData] = useState([]);
-  const [message, setMessage] = useState("");
-  // const [message] = useState("");
+  // const [message, setMessage] = useState("");
+  const [message] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [newHotel, setNewHotel] = useState({
     name: "",

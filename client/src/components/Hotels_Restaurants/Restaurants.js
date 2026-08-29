@@ -8,7 +8,7 @@ import "./Restaurants.css";
 const Restaurants = () => {
   const { isAdmin } = useAuth();
   const [restaurants, setRestaurants] = useState([]);
-  const [message, setMessage] = useState("");
+  const [message] = useState("");
 
   const [showModal, setShowModal] = useState(false);
   const [newRestaurant, setNewRestaurant] = useState({
