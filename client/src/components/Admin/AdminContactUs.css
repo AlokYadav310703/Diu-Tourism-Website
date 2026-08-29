@@ -1,0 +1,114 @@
+/* LocalcontactUs.css */
+
+.contactUs-page-wrapper {
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .contactUs-details-container {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .contactUs-details-container h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .table-wrapper {
+    overflow-x: auto;
+    margin: 1rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .contactUs-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+  }
+  
+  .contactUs-table thead {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .contactUs-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  
+  .contactUs-table tbody tr {
+    text-wrap: wrap;
+    border-bottom: 1px solid #ecf0f1;
+    transition: background-color 0.2s ease;
+  }
+  
+  .contactUs-table tbody tr:last-child {
+    border-bottom: none;
+  }
+  
+  .contactUs-table tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .contactUs-table td {
+    padding: 1rem;
+    color: #34495e;
+    vertical-align: top;
+  }
+  
+  .contactUs-table td:not(:last-child) {
+    border-right: 1px solid #ecf0f1;
+  }
+  .adminContactusRemoveOnebtn{
+    width: auto;
+  }
+  .adminContactusRemoveAllbtn{
+    width:100px;
+    height: 45px;
+  }
+  
+  .no-data {
+    text-align: center;
+    color: #7f8c8d;
+    padding: 2rem;
+    font-size: 1.1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .contactUs-page-wrapper {
+      padding: 1rem;
+    }
+    
+    .contactUs-details-container {
+      padding: 1rem;
+    }
+    
+    .contactUs-table th, 
+    .contactUs-table td {
+      padding: 0.75rem 0.5rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Zebra striping for better readability */
+  .contactUs-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  
+  .contactUs-table tbody tr:nth-child(even):hover {
+    background-color: #e9ecef;
+  }

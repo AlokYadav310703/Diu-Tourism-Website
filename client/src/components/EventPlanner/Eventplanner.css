@@ -1,0 +1,120 @@
+.ep-page {
+    margin: 0;
+    padding: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.ep-hero {
+    text-align: center;
+    padding: 2.5rem 1.25rem 1.75rem;
+}
+
+.ep-hero h1 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.ep-hero p {
+    color: #6b7280;
+    font-size: 0.98rem;
+    margin: 0 0 1.5rem;
+}
+
+.ep-board {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 0 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.ep-save-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 2rem 1rem 3rem;
+}
+
+.ep-save-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 152, 121, 0.3);
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.ep-save-btn:hover:not(:disabled) {
+    background-color: #00695c;
+    transform: translateY(-1px);
+}
+
+.ep-save-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.ep-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    animation: epBannerIn 0.25s ease;
+}
+
+@keyframes epBannerIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.ep-banner--success {
+    background-color: #e6f5f2;
+    color: #00695c;
+}
+
+.ep-banner--error {
+    background-color: #fdecea;
+    color: #c62828;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+    .ep-board {
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .ep-hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .ep-board {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ep-banner {
+        animation: none;
+    }
+}

@@ -1,0 +1,172 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100vw;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f2f2;
+    overflow-x: hidden;
+  }
+  
+  .restaurants-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+  
+  .restaurants-page-wrapper .navbar {
+    width: 100vw;
+  }
+  
+  .details-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  .details-container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #222;
+    margin: 2rem 0 1.5rem;
+    position: relative;
+  }
+  
+  .details-container h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    margin: 10px auto 0;
+    background-color: #FF5722;
+    border-radius: 2px;
+  }
+  
+  .cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .restaurant-card {
+    position: relative; /* <-- Add this line */
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 350px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+  }
+  
+  
+  .restaurant-card:hover {
+    transform: translateY(-8px);
+  }
+  
+  .restaurant-card h3 {
+    margin: 0 0 12px;
+    font-size: 1.6rem;
+    color: #FF5722;
+  }
+  
+  .restaurant-card p {
+    margin: 6px 0;
+    font-size: 1rem;
+    color: #444;
+  }
+  
+  .restaurant-card span {
+    font-weight: bold;
+    color: #111;
+  }
+  .add-restaurant-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #aaa;
+  }
+  
+  .no-data {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #999;
+    margin-top: 2rem;
+  }
+
+  .remove-hotel-card{
+    display: flex;
+    justify-content: right;
+  }
+  
+  #admin-remove-restaurants-btn{
+    margin: 0;
+    padding: 0;
+    background-color: #cdb5b5;
+    width: 70px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .modal input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .modal-buttons button {
+    padding: 8px 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .details-container h2 {
+      font-size: 2rem;
+    }
+  
+    .restaurant-card {
+      max-width: 100%;
+    }
+  }
+  

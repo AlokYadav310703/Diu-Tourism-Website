@@ -1,0 +1,42 @@
+.drop_area,
+.hide_drop {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 10px;
+    border: 2px dashed transparent;
+    transition: height 0.2s ease, opacity 0.2s ease, border-color 0.2s ease,
+        background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Height stays non-zero even when "hidden" - a zero-height element can
+   never receive a dragenter event, so it could never expand in the first
+   place. This keeps a slim, invisible-but-real hit area at all times. */
+.hide_drop {
+    height: 12px;
+    opacity: 0;
+    color: transparent;
+}
+
+.drop_area {
+    height: 52px;
+    opacity: 1;
+    border-color: #009879;
+    background-color: #e6f5f2;
+    color: #009879;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .drop_area,
+    .hide_drop {
+        transition: none;
+    }
+}

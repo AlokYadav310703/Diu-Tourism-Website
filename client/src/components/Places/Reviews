@@ -1,0 +1,8 @@
+1. Don't Apply Css to Body instead wrap a whole page into another container and give style to that page as body.
+2. Wrap a container inside other container
+3. Remove Overflow hidden
+4. Give unique name to each class which does not match any class name in whole folder
+5. Use inspect to verify is correct css is applied to the element or not
+6. Always check credentials include option when sending request from frontend to backend.
+7. Add margin 0 and padding 0 for button to align.
+

@@ -1,0 +1,37 @@
+.DP {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.DP_icon {
+    color: #009879;
+    font-size: 1.1rem;
+}
+
+.DP_label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.DP .react-datepicker-wrapper {
+    width: auto;
+}
+
+.DP input {
+    width: 150px;
+    padding: 8px 12px;
+    border: 1px solid #dcdfe4;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: border-color 0.2s ease;
+}
+
+.DP input:focus {
+    outline: none;
+    border-color: #009879;
+}

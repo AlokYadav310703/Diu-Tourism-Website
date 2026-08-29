@@ -1,0 +1,92 @@
+/* body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8;
+}
+
+.flights-page-wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.details-container {
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.details-container h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 2.4rem;
+  color: #1a4b8c;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.flight-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.flight-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flight-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.flight-card img {
+  width: 40px;
+  height: auto;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
+  align-self: flex-start;
+}
+
+.flight-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.flight-detail span {
+  font-weight: 600;
+  color: #1a4b8c;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #999;
+  margin-top: 40px;
+}
+
+@media (max-width: 480px) {
+  .details-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .flight-detail {
+    font-size: 0.95rem;
+  }
+} */
