@@ -23,7 +23,7 @@ import RemoveFeedback from "./components/Admin/RemoveFeedback";
 import RemoveReply from "./components/Admin/RemoveReply";
 import AdminContactUs from "./components/Admin/AdminContactUs";
 import AdminLogin from "./components/Admin/AdminLogin";
-// import SideBar from "./components/Slidebar/Slidebar";
+import SideBar from "./components/Slidebar/Slidebar";
 import EventPlanner from "./components/EventPlanner/EventPlanner";
 import About from "./components/Features/About";
 // import Disp from "./components/Features/UtilityMaps";
