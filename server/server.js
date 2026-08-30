@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-
 import hotel from './routes/hotel.js';
 import restaurant from './routes/restaurant.js';
 import transport from './routes/transport.js';

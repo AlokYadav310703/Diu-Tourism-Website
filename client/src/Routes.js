@@ -230,6 +230,10 @@ const router = createBrowserRouter([
     path: "/maps",
     element: <Maps />
   },
+  {
+    path: "/sidebar",
+    element: <SideBar />
+  },
 
   // {
   //   path: "/admin/Add_remove_stateBuses",
