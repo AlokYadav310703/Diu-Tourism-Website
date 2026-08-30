@@ -5,14 +5,14 @@ const Weather = () => {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
 
-  const API_KEY = 'f80eb5c0782e480881861759251803';
+  const WEATHER_API_KEY = 'f80eb5c0782e480881861759251803';
   const DEFAULT_LOCATION = 'Diu';
 
   useEffect(() => {
     const fetchWeather = async () => {
       try {
         const response = await fetch(
-          `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${DEFAULT_LOCATION}&aqi=yes`
+          `https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${DEFAULT_LOCATION}&aqi=yes`
         );
         if (!response.ok) {
           throw new Error('Failed to fetch weather data');
