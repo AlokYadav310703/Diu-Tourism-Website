@@ -27,50 +27,31 @@ const allowedOrigins = (process.env.CORS_ORIGINS || '')
   .map(origin => origin.trim())
   .filter(Boolean);
 
-console.log('Allowed CORS origins:', allowedOrigins);
+console.log('CORS_ORIGINS raw:', process.env.CORS_ORIGINS);
+console.log('Allowed origins:', allowedOrigins);
 
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log('Incoming origin:', JSON.stringify(origin));
+    console.log('Allowed origins:', JSON.stringify(allowedOrigins));
 
-    // Allow requests without an Origin header
-    // (Postman, server-to-server requests, etc.)
     if (!origin) {
       return callback(null, true);
     }
 
-    // Allow configured frontend origins
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
 
-    console.error(`CORS blocked origin: ${origin}`);
+    console.error('CORS blocked origin:', JSON.stringify(origin));
     return callback(new Error(`CORS blocked origin: ${origin}`));
   },
-
   credentials: true,
-
-  methods: [
-    'GET',
-    'POST',
-    'PUT',
-    'PATCH',
-    'DELETE',
-    'OPTIONS'
-  ],
-
-  allowedHeaders: [
-    'Content-Type',
-    'Authorization',
-    'X-Requested-With'
-  ],
-
-  optionsSuccessStatus: 204
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 
 app.use(cors(corsOptions));
-
-// Explicitly handle preflight requests
-app.options('*', cors(corsOptions));
 
 // --------------------------------------------------
 // Middleware
