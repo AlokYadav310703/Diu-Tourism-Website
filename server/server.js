@@ -1,4 +1,4 @@
-```javascript
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -138,7 +138,6 @@ const server = app.listen(PORT, () => {
 server.timeout = 180000;
 server.keepAliveTimeout = 180000;
 server.headersTimeout = 185000;
-```
 
 
 
