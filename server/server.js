@@ -1,4 +1,3 @@
-
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -22,19 +21,18 @@ const PORT = process.env.PORT || 5000;
 // CORS
 // --------------------------------------------------
 
-const allowedOrigins = (process.env.CORS_ORIGINS || '')
-  .split(',')
-  .map(origin => origin.trim())
-  .filter(Boolean);
-
-console.log('CORS_ORIGINS raw:', process.env.CORS_ORIGINS);
-console.log('Allowed origins:', allowedOrigins);
+const allowedOrigins = [
+  'https://diutourism.vercel.app',
+  'https://diutourism-5vl15ugri-thanos15.vercel.app',
+  'http://localhost:5173'
+];
 
 const corsOptions = {
   origin: function (origin, callback) {
     console.log('Incoming origin:', JSON.stringify(origin));
-    console.log('Allowed origins:', JSON.stringify(allowedOrigins));
 
+    // Allow requests without an Origin header
+    // such as server-to-server requests.
     if (!origin) {
       return callback(null, true);
     }
@@ -43,12 +41,31 @@ const corsOptions = {
       return callback(null, true);
     }
 
-    console.error('CORS blocked origin:', JSON.stringify(origin));
-    return callback(new Error(`CORS blocked origin: ${origin}`));
+    console.log('Blocked origin:', JSON.stringify(origin));
+
+    // Don't throw an error for CORS.
+    // Simply don't allow the origin.
+    return callback(null, false);
   },
+
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+
+  methods: [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+  ],
+
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With'
+  ],
+
+  optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
@@ -60,7 +77,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // --------------------------------------------------
-// Health check
+// Health Check
 // --------------------------------------------------
 
 app.get('/api/health', (req, res) => {
@@ -85,19 +102,11 @@ app.use('/chatbot', chatbot);
 app.use('/trip-reminders', tripReminders);
 
 // --------------------------------------------------
-// Error handler
+// Error Handler
 // --------------------------------------------------
 
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
-
-  // If the error was caused by CORS, return a normal error
-  // instead of crashing the request.
-  if (err.message?.startsWith('CORS blocked origin:')) {
-    return res.status(403).json({
-      error: 'CORS origin not allowed'
-    });
-  }
 
   res.status(500).json({
     error: 'Internal server error'
@@ -105,7 +114,7 @@ app.use((err, req, res, next) => {
 });
 
 // --------------------------------------------------
-// Start server
+// Start Server
 // --------------------------------------------------
 
 const server = app.listen(PORT, () => {
@@ -113,7 +122,7 @@ const server = app.listen(PORT, () => {
 });
 
 // --------------------------------------------------
-// Server timeouts
+// Server Timeouts
 // --------------------------------------------------
 
 server.timeout = 180000;
